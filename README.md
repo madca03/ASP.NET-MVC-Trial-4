@@ -32,6 +32,6 @@ RESTful CRUD using ASP.NET MVC and VueJS as Frontend
 
 ## Current Progress
 
-![index_page](./images/index_page.png, "index page")
-![edit_page](./images/edit_page.png, "edit page")
-![show_page](./images/show_page.png, "show page")
+![index_page](./images/index_page.png "index page")
+![edit_page](./images/edit_page.png "edit page")
+![show_page](./images/show_page.png "show page")
