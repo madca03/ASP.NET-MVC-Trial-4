@@ -27,7 +27,7 @@ RESTful CRUD using ASP.NET MVC and VueJS as Frontend
 
 - Refactor MVC App as per the suggestions of sir marc
 - The current VueJS file structure seems disorganized. There are also lots of repeating HTML which can be made into finer components
-- Use **pug** as the view engine for the HTML templates in VueJS.
+- Use **pug** as the view engine for the HTML templates in VueJS to declutter the template code.
 - Enhance **Show** page of the student resource
 
 ## Current Progress
