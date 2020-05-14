@@ -4,7 +4,7 @@ RESTful CRUD using ASP.NET MVC and VueJS as Frontend
 
 ## No 'Access-Control-Allow-Origin' header is present on the requested resource
 
-- Had this issue when fetching data from the API routes of ASP.NET MVC. I tried to resolve it by adding this XML code in web.config which adds some HTTP headers in the REST API server's response
+- Had this issue when fetching data from the API routes of ASP.NET MVC. I tried to resolve it by adding this XML code in web.config which adds some HTTP headers in the REST API server's response. For more information, see this [link](https://stackoverflow.com/questions/27504256/mvc-web-api-no-access-control-allow-origin-header-is-present-on-the-requested)
 
 ```XML
 <system.webServer>
