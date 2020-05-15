@@ -52,8 +52,9 @@ export default apiClient;
 
 ## Notes for testing
 
-- The ASP.NET MVC RESTful service is deployed on a local IIS at port 8080
-- The VueJS runs at port 3000 and fetches data from localhost:8080
+- The ASP.NET MVC RESTful service is deployed on a local IIS at port 8080. Frontend VueJS requests is also possible while ASP.NET MVC App is
+  in debug mode (not deployed on local IIS - i.e. running at https://localhost:44350)
+- The VueJS runs at port 3000 and fetches data from its own baseURL (http://localhost:3000) to prevent cross-site request or the encountering of the CORS policy error as discussed above. With the devServer.proxy configuration setup, all requests will be forwarded to the server address of the proxy (i.e. https://localhost:44350).
 
 ## Todo
 
