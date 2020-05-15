@@ -18,6 +18,38 @@ RESTful CRUD using ASP.NET MVC and VueJS as Frontend
 </system.webServer>
 ```
 
+- The solution above might work but **it should not be done**. The other solution is to configure a **devServer.proxy** in your VueJS application such as the one shown below. This devServer configuration should be placed in **vue.config.js**. For instance, in the configuration shown below, the RESTful API ASP.NET MVC server runs at **https://localhost:44350** while the VueJS application runs at **http://localhost:3000**. Now, when trying to fetch from the RESTful APIs using either fetch() / \$.ajax() / axios() in javascript, you should set the baseURL of the request to the baseURL of the VueJS application which in this case is at http://localhost:3000. With this setup, we can now prevent having a cross-site request which is the one causing the **No Access-Control-Allow-Origin header is present on the requested resource** error.
+
+- vue.config.js
+
+```javascript
+module.exports = {
+  devServer: {
+    port: 3000,
+    proxy: "https://localhost:44350",
+  },
+};
+```
+
+- notice the baseURL when fetching RESTful API
+
+```javascript
+import axios from "axios";
+
+const baseURL = "http://localhost:3000";
+
+const apiClient = axios.create({
+  baseURL: `${baseURL}/api`,
+  withCredentials: false,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+});
+
+export default apiClient;
+```
+
 ## Notes for testing
 
 - The ASP.NET MVC RESTful service is deployed on a local IIS at port 8080
