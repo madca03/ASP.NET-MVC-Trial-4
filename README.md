@@ -31,7 +31,8 @@ module.exports = {
 };
 ```
 
-- notice the baseURL when fetching RESTful API
+- notice the baseURL when fetching RESTful API, it points to the baseURL of the VueJS application. the **devServer.proxy** settings handles
+  the forwarding of the request to the real RESTful API service at https://localhost:44350
 
 ```javascript
 import axios from "axios";
