@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
     port: 3000,
-    proxy: 'https://localhost:44350'
+    proxy: 'http://localhost:8080'
   }
 }

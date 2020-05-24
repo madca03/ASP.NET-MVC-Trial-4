@@ -32,7 +32,7 @@ export default {
     showStudent() {
       this.$router.push({
         name: 'student-show',
-        params: { id: this.student.StudentID, student: this.student }
+        params: { id: this.student.StudentID, passedStudent: this.student }
       })
     },
 

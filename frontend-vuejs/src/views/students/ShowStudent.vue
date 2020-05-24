@@ -1,16 +1,12 @@
 <template>
   <div class="show-student">
-    <StudentShowDetails
-      v-if="!editStudent"
+    <component
+      v-if="student"
+      :is="activeComponent"
       :student="student"
-    ></StudentShowDetails>
-
-    <StudentEditForm
       @api-update-success="returnToStudentPage"
       @update-student-cancelled="returnToStudentPage"
-      v-if="editStudent"
-      :student="student"
-    ></StudentEditForm>
+    />
 
     <button
       type="button"
@@ -38,11 +34,12 @@ export default {
     id: {
       required: true
     },
-    student: Object
+    passedStudent: Object
   },
 
   data() {
     return {
+      retrievedStudent: null,
       editStudent: false
     }
   },
@@ -57,11 +54,20 @@ export default {
     }
   },
 
+  computed: {
+    student() {
+      return this.passedStudent || this.retrievedStudent
+    },
+    activeComponent() {
+      return this.editStudent ? StudentEditForm : StudentShowDetails
+    }
+  },
+
   created() {
-    if (this.student === undefined) {
+    if (this.passedStudent === undefined) {
       StudentAPIServices.getStudent(this.id)
         .then(response => {
-          this.student = response.data.result
+          this.retrievedStudent = response.data.result
         })
         .catch(error => {
           console.log(error)
