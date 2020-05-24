@@ -33,12 +33,13 @@ export default {
 
   methods: {
     deleteStudentRow(StudentID) {
-      this.students.find((student, index, array) => {
-        if (parseInt(student.StudentID) === parseInt(StudentID)) {
-          array.splice(index, 1)
-          return true
-        }
-      })
+      const parsedID = parseInt(StudentID)
+      const idx = this.students.findIndex(
+        x => parseInt(x.StudentID) === parsedID
+      )
+      if (idx > 0) {
+        this.students.splice(idx, 1)
+      }
     }
   }
 }
