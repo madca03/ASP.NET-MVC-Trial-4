@@ -15,7 +15,7 @@
                 type="test"
                 class="form-control"
                 id="first-name"
-                :value="student.FirstName"
+                v-model="FirstName"
               />
             </div>
 
@@ -25,13 +25,18 @@
                 type="test"
                 class="form-control"
                 id="last-name"
-                :value="student.LastName"
+                v-model="LastName"
               />
             </div>
 
             <div class="form-group">
               <label for="enrollment-date">Enrollment Date</label>
-              <input type="date" class="form-control" id="enrollment-date" />
+              <input
+                type="date"
+                class="form-control"
+                id="enrollment-date"
+                v-model="EnrollmentDate"
+              />
             </div>
 
             <div class="container">
@@ -79,6 +84,9 @@ export default {
 
   data() {
     return {
+      FirstName: null,
+      LastName: null,
+      EnrollmentDate: null,
       errors: []
     }
   },
@@ -87,33 +95,36 @@ export default {
     async updateStudent() {
       this.errors = []
 
-      let StudentID = this.student.StudentID
-      let FirstName = document.getElementById('first-name').value
-      let LastName = document.getElementById('last-name').value
-      let EnrollmentDate = document.getElementById('enrollment-date').value
-
-      if (FirstName === '' || FirstName === undefined || FirstName === null) {
+      if (
+        this.FirstName === '' ||
+        this.FirstName === undefined ||
+        this.FirstName === null
+      ) {
         this.errors.push('First name is required')
       }
 
-      if (LastName === '' || LastName === undefined || LastName === null) {
+      if (
+        this.LastName === '' ||
+        this.LastName === undefined ||
+        this.LastName === null
+      ) {
         this.errors.push('Last name is required')
       }
 
       if (
-        EnrollmentDate === '' ||
-        EnrollmentDate === undefined ||
-        EnrollmentDate === null
+        this.EnrollmentDate === '' ||
+        this.EnrollmentDate === undefined ||
+        this.EnrollmentDate === null
       ) {
         this.errors.push('Enrollment date is required')
       }
 
       if (!this.errors.length) {
         let student = {
-          FirstName,
-          LastName,
-          EnrollmentDate,
-          StudentID
+          FirstName: this.FirstName,
+          LastName: this.LastName,
+          EnrollmentDate: this.EnrollmentDate,
+          StudentID: this.student.StudentID
         }
 
         let response = await StudentAPIServices.updateStudent(student)
@@ -136,6 +147,13 @@ export default {
     cancelUpdateStudentForm() {
       this.$emit('update-student-cancelled')
     }
+  },
+
+  created() {
+    this.FirstName = this.student.FirstName
+    this.LastName = this.student.LastName
+    const tempDate = this.student.EnrollmentDate.split(' ')[0].split('/')
+    this.EnrollmentDate = `${tempDate[2]}-${tempDate[0]}-${tempDate[1]}`
   }
 }
 </script>
